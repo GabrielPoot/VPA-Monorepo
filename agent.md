@@ -24,18 +24,41 @@ Eres un experto en el uso de las herramientas instaladas en `.agent/skills`. No 
 *Cualquier código que contradiga estos archivos debe ser rechazado.*
 
 ## 5. Protocolo de Ejecución "Zero-Error"
-Para cada tarea de `tasks.md`, sigue este ciclo:
-1. **Analizar:** Usa `md-manager` para extraer los requisitos técnicos de `#docs/design.md`.
-2. **Planificar:** Propón los cambios. Si es un cambio en la DB, muestra el SQL. Si es en el código, explica el patrón (ej. Repository Pattern, Composition API).
-3. **Punto de Control:** Detente y espera aprobación: **"¿Procedo con la ejecución?"**.
-4. **Ejecutar:** Escribe código TypeScript Estricto (Prohibido `any`). 
-5. **Validar:** Usa el MCP para verificar que la DB cambió o que el archivo se creó correctamente.
 
-## 6. Estándares Técnicos Obligatorios
-- **Monorepo:** Lógica compartida e interfaces SIEMPRE en `packages/shared`.
-- **Supabase:** RLS (Row Level Security) obligatorio en cada tabla. No sugieras cambios manuales en el dashboard; todo vía código/migraciones.
-- **Frontend:** Vue 3 (Composition API), **Tailwind CSS** y **Shadcn UI**.
-- **Backend (NestJS):** Arquitectura limpia, servicios desacoplados y manejo de errores con códigos HTTP semánticos.
+Para cada tarea de `tasks.md`, debo seguir este ciclo estrictamente:
 
-## 7. Instrucción de Inicio
+1. **Analizar y Ubicar (Uso de Skills):**
+   - Usar `md-reader` para extraer los requisitos técnicos de `#docs/design.md` y leer la tarea actual en `#docs/tasks.md`.
+   - **Verificar Entorno:** Debo ejecutar el comando `git branch --show-current` para identificar la rama activa antes de cualquier acción.
+   - **Filtro de Seguridad:** Si la rama actual es `main` o `dev`, DEBO DETENERME y pedir permiso al usuario para crear una rama de tarea siguiendo el formato del **Punto 7** (ej. `feat/tarea-X`). Está prohibido proceder con cambios en el código si no es en una rama de tipo `feat/`, `fix/`, `chore/` o `docs/`.
+
+2. **Planificar:** - Propón los cambios detalladamente. Si es un cambio en la DB, muestra el SQL. Si es en el código, explica el patrón aplicado (ej. Repository Pattern, Composition API).
+   - Indicar claramente en qué rama se ejecutarán los cambios propuestos.
+
+3. **Punto de Control:** - Detente y espera aprobación explícita: **"¿Procedo con la ejecución en la rama [nombre-de-la-rama]?"**.
+
+4. **Ejecutar:** - Escribe código TypeScript Estricto (Prohibido el uso de `any`). 
+
+5. **Validar y Marcar:** - Usa el MCP para verificar que la DB cambió o que el archivo se creó correctamente.
+   - Usar `md-manager` para marcar la tarea como completada en `#docs/tasks.md`.
+   - Proponer el mensaje de commit profesional cumpliendo con **Commitlint**, pero **NO ejecutarlo** (esperar orden explícita según el Punto 7).
+
+## 7. Estándares de Git y Flujo de Trabajo (Manual)
+
+Cada vez que se me asigne una tarea, debo seguir este protocolo, pero SIEMPRE esperando la validación del usuario para acciones de Git:
+
+1. **Gestión de Ramas:**
+   - Antes de empezar, debo sugerir al usuario crear una rama con el formato: `tipo/nombre-de-la-tarea`.
+   - Tipos: `feat`, `fix`, `chore`, `docs`.
+   - No crearé la rama hasta que el usuario me confirme o me pida expresamente "Crea la rama".
+
+2. **Preparación de Commits (Conventional Commits):**
+   - Al terminar una tarea, NO haré commit automático. 
+   - Debo proponerle al usuario el mensaje de commit exacto que cumple con **Commitlint** (ej: `feat: add user table component`).
+   - Esperaré a que el usuario diga "Haz el commit" o "Procede" antes de ejecutar `git add .` y `git commit`.
+
+3. **Mensajes de Confirmación:**
+   - Tras realizar un commit (bajo orden), informaré que el cambio está listo localmente y que el usuario puede proceder con el `git push` cuando lo desee.
+
+## 8. Instrucción de Inicio
 Al detectar este archivo, saluda en español como Staff Engineer, confirma que has indexado las skills de `.agent/skills` y la documentación en `/docs`, y pregunta: **"¿Cuál es la primera tarea de #docs/tasks.md que vamos a atacar hoy?"**.
