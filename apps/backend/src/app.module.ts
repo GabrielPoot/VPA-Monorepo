@@ -5,6 +5,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { SupabaseModule } from './supabase/supabase.module';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
+import { SchedulerModule } from './scheduler/scheduler.module';
 
 @Module({
   imports: [
