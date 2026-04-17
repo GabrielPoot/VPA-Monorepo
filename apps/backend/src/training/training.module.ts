@@ -5,9 +5,10 @@ import { SessionService } from './session.service';
 import { ResultService } from './result.service';
 import { AnalyticsService } from './analytics.service';
 import { GradingModule } from '../grading/grading.module';
+import { RiotModule } from '../riot/riot.module';
 
 @Module({
-  imports: [GradingModule],
+  imports: [GradingModule, RiotModule],
   controllers: [TrainingController],
   providers: [
     CommitmentService,
