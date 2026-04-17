@@ -15,7 +15,7 @@ export class AnalyticsService {
         id,
         daily_sessions (
           id, session_status, completed_at,
-          gallery_results ( grade, score )
+          exercise_results ( grade, score )
         )
       `)
       .eq('user_id', userId);
@@ -35,7 +35,7 @@ export class AnalyticsService {
         if (s.session_status === 'COMPLETED') completedSessions++;
         if (s.session_status === 'FAILED') failedSessions++;
 
-        s.gallery_results.forEach((r: any) => {
+        s.exercise_results.forEach((r: any) => {
           if (r.grade) gradesDist[r.grade] = (gradesDist[r.grade] || 0) + 1;
         });
       });
