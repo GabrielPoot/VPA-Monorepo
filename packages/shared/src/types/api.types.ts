@@ -6,7 +6,8 @@ export interface PaginationMeta {
   total: number;
   page: number;
   limit: number;
-  totalPages: number;
+  totalPages?: number;
+  hasNext?: boolean;
 }
 
 export interface PaginatedResponse<T> {
